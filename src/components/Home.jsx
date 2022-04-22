@@ -6,11 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_entity } from '../Redux/EntityRedux/EntityAction';
+import { computeHeadingLevel } from '@testing-library/react';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -26,11 +27,14 @@ function createData(name, calories, fat, carbs, protein) {
 export default function Home() {
     const dispatch=useDispatch()
     const {data}=useSelector((store)=>store.entity_get)
+    const [filter,setFilter]=useState([])
  
-
     useEffect(()=>{
         dispatch(get_entity())
+        setFilter(data)
     },[])
+    const getData=()=>{ }
+    console.log(filter);
     
   return (
     <>
@@ -41,10 +45,29 @@ export default function Home() {
     </AppBar>
     <Box sx={{ margin:"auto",marginTop:"100px",display:"flex", justifyContent:"space-between" , width:"70%"}}>
    <Link to='/listing/create' style={{textDecoration:"none"}}> <Button variant='contained'>Create Entity</Button></Link>
-        <Button variant='contained'>Filter By City Name</Button>
-        <Button variant='contained'> Filter By Varified</Button>
-        <Button variant='contained'>Sort By Cost Per Day</Button>
-        <Button variant='contained'>Sort By Cost Rating</Button>
+        <Button variant='contained' onClick={()=>{
+               let newdata= data.filter((e)=>e.city=="Ghaziabad")
+               setFilter(newdata)
+        }}>Filter By City Name</Button>
+        <Button variant='contained' onClick={()=>{
+               let newdata= data.filter((e)=>e.verified=="Yes")
+               setFilter(newdata)
+        }}> Filter By Varified</Button>
+        <Button variant='contained' onClick={()=>{
+               let updated=data.sort((a,b)=> {
+                     
+                    return Number(b.cpd)-Number(a.cpd)
+               })
+              console.log(updated)
+               setFilter(updated)
+        }}>Sort By Cost Per Day</Button>
+        <Button variant='contained' onClick={()=>{
+                  let letest= data.sort((a,b)=> Number(a.rating)-Number(b.rating))
+                    setFilter(letest)
+        }}>Sort By Cost Rating</Button>
+         <Button variant='contained' onClick={()=>{
+                 // setFilter(data)
+        }}>Show All</Button>
     </Box>
      {/* table box */}
     <Box sx={{margin:"10px"}}>
@@ -63,7 +86,7 @@ export default function Home() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {filter.map((row) => (
             <TableRow
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
