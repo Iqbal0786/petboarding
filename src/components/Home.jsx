@@ -6,9 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { get_entity } from '../Redux/EntityRedux/EntityAction';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -22,6 +24,13 @@ function createData(name, calories, fat, carbs, protein) {
     createData('Gingerbread', 356, 16.0, 49, 3.9),
   ];
 export default function Home() {
+    const dispatch=useDispatch()
+    const {data}=useSelector((store)=>store.entity_get)
+ 
+
+    useEffect(()=>{
+        dispatch(get_entity())
+    },[])
     
   return (
     <>
@@ -54,21 +63,21 @@ export default function Home() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.id}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.name}</TableCell>
+              <TableCell align="right">{row.city}</TableCell>
+              <TableCell align="right">{row.address}</TableCell>
+              <TableCell align="right">{row.capacity}</TableCell>
+              <TableCell align="right">{row.cpd}</TableCell>
+              <TableCell align="right">{row.verified}</TableCell>
+              <TableCell align="right">{row.rating}</TableCell>
               
             </TableRow>
           ))}

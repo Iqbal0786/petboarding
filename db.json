@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "name": "Morgon PerCare Center",
+      "city": "Ghaziabad",
+      "address": "Ghaziabad ,Uttar Pradesh",
+      "capacity": "20",
+      "cpd": "150",
+      "verified": "Yes",
+      "rating": 4,
+      "id": 1
+    },
+    {
+      "name": "Peter Petcare ",
+      "city": "Allahabad",
+      "address": "Allahabad ,Uttar Pradesh",
+      "capacity": "200",
+      "cpd": "150",
+      "verified": "Yes",
+      "rating": 3,
+      "id": 2
+    },
+    {
+      "name": "Peter Petcare ",
+      "city": "Gorakhpur",
+      "address": "Gorakhpur ,Uttar Pradesh",
+      "capacity": "200",
+      "cpd": "150",
+      "verified": "No",
+      "rating": 2,
+      "id": 3
+    },
+    {
+      "name": "Robo pet zone",
+      "city": "Ghaziabad",
+      "address": "Ghaziabad ,Uttar Pradesh",
+      "capacity": "300",
+      "cpd": "500",
+      "verified": "Yes",
+      "rating": 4,
+      "id": 4
+    }
+  ]
+}

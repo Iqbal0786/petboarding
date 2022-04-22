@@ -1,8 +1,11 @@
 import { AppBar, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Paper, Rating, Select, TextField, Toolbar, Typography } from '@mui/material'
 import { computeHeadingLevel } from '@testing-library/react';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { post_entity } from '../Redux/EntityRedux/EntityAction';
 
 export default function CreateEntity() {
+    const dispatch=useDispatch()
     const [data,setData]=useState({
         name:"",
         city:"",
@@ -19,6 +22,9 @@ export default function CreateEntity() {
          setData({...data, [id]:value})
         
         
+    }
+    const postData=()=>{
+          dispatch(post_entity(data))
     }
     console.log(Rating)
     console.log(data)
@@ -77,7 +83,7 @@ export default function CreateEntity() {
         </Select>
       </FormControl>
         
-      <Button variant='outlined'>Save Data</Button>
+      <Button variant='outlined' onClick={postData}>Save Data</Button>
          </Box>
       </Paper>
      </Box>
