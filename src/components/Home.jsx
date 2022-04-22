@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import React from 'react'
 import { styled } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -29,10 +30,12 @@ export default function Home() {
             <Typography>PetBoarding</Typography>
         </Toolbar>
     </AppBar>
-    <Box sx={{ margin:"auto",marginTop:"100px",display:"flex", justifyContent:"space-between" , width:"50%"}}>
+    <Box sx={{ margin:"auto",marginTop:"100px",display:"flex", justifyContent:"space-between" , width:"70%"}}>
+   <Link to='/listing/create' style={{textDecoration:"none"}}> <Button variant='contained'>Create Entity</Button></Link>
         <Button variant='contained'>Filter By City Name</Button>
         <Button variant='contained'> Filter By Varified</Button>
         <Button variant='contained'>Sort By Cost Per Day</Button>
+        <Button variant='contained'>Sort By Cost Rating</Button>
     </Box>
      {/* table box */}
     <Box sx={{margin:"10px"}}>
